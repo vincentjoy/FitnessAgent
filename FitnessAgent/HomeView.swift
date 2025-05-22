@@ -15,7 +15,7 @@ struct HomeView: View {
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack {
+            VStack(alignment: .leading) {
                 Text("Welcome")
                     .font(.largeTitle)
                     .padding()
@@ -64,7 +64,11 @@ struct HomeView: View {
                         ProgressCircleView(progress: $stand, goal: 12, color: .blue)
                             .padding(.all, 40)
                     }
+                    .padding(.horizontal)
+                    
+                    Spacer()
                 }
+                .padding()
             }
         }
     }
