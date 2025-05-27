@@ -36,7 +36,7 @@ struct NavigationStackApp: View {
             .navigationTitle("Users")
             
             .navigationDestination(for: User.self) { user in
-                
+                DetailView(user: user, navigationPath: $navigationPath)
             }
         }
     }

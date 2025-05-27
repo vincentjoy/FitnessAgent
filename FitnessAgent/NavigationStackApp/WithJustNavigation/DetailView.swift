@@ -31,7 +31,7 @@ struct DetailView: View {
         .navigationTitle("\(user.name)'s Details")
         .navigationDestination(for: String.self) { value in
             if value == "NextView" {
-                
+                NextView(navigationPath: $navigationPath)
             }
         }
     }
