@@ -8,6 +8,10 @@
 import Foundation
 import HealthKit
 
+enum HealthKitError: Error {
+    case accessDenied
+}
+
 class HealthManager {
     static let shared = HealthManager()
     
@@ -27,9 +31,14 @@ class HealthManager {
     func fetchTodayCaloriesBurned(completion: @escaping (Result<Double, Error>) -> Void) {
         let calories = HKQuantityType(.activeEnergyBurned)
         let predicate = HKQuery.predicateForSamples(withStart: .startOfDay, end: Date())
-        let query = HKStatisticsQuery(quantityType: calories, quantitySamplePredicate: predicate) { _, results, error in
-            guard let quantity = results?.sumQuantity(), error == nil else {
-                completion(.failure(NSError()))
+        let query = HKStatisticsQuery(quantityType: calories, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, results, error in
+            if let error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let quantity = results?.sumQuantity() else {
+                completion(.failure(HealthKitError.accessDenied))
                 return
             }
             
@@ -43,8 +52,14 @@ class HealthManager {
         let exercise = HKQuantityType(.appleExerciseTime)
         let predicate = HKQuery.predicateForSamples(withStart: .startOfDay, end: Date())
         let query = HKStatisticsQuery(quantityType: exercise, quantitySamplePredicate: predicate) { _, results, error in
-            guard let quantity = results?.sumQuantity(), error == nil else {
-                completion(.failure(NSError()))
+            
+            if let error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let quantity = results?.sumQuantity() else {
+                completion(.failure(HealthKitError.accessDenied))
                 return
             }
             
@@ -59,7 +74,7 @@ class HealthManager {
         let predicate = HKQuery.predicateForSamples(withStart: .startOfDay, end: Date())
         let query = HKSampleQuery(sampleType: stand, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { _, results, error in
             guard let samples = results as? [HKCategorySample], error == nil else {
-                completion(.failure(NSError()))
+                completion(.failure(HealthKitError.accessDenied))
                 return
             }
             
