@@ -12,7 +12,7 @@ struct FitnessAgentApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TabViewNavigationApp()
+            FitnessTabView()
         }
     }
 }

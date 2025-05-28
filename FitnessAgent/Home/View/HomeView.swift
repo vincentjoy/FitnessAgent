@@ -29,7 +29,7 @@ struct HomeView: View {
                                     .font(.callout)
                                     .bold()
                                     .foregroundStyle(Color.red)
-                                Text("123 kcal")
+                                Text("\(viewModel.calories)")
                                     .bold()
                             }
                             .padding(.bottom)
@@ -39,7 +39,7 @@ struct HomeView: View {
                                     .font(.callout)
                                     .bold()
                                     .foregroundStyle(Color.green)
-                                Text("52 mins")
+                                Text("\(viewModel.exercise)")
                                     .bold()
                             }
                             .padding(.bottom)
@@ -49,7 +49,7 @@ struct HomeView: View {
                                     .font(.callout)
                                     .bold()
                                     .foregroundStyle(Color.blue)
-                                Text("8 hours")
+                                Text("\(viewModel.stand)")
                                     .bold()
                             }
                         }
@@ -58,7 +58,7 @@ struct HomeView: View {
                         
                         ZStack {
                             ProgressCircleView(progress: $viewModel.calories, goal: 200, color: .red)
-                            ProgressCircleView(progress: $viewModel.active, goal: 60, color: .green)
+                            ProgressCircleView(progress: $viewModel.exercise, goal: 60, color: .green)
                                 .padding(.all, 20)
                             ProgressCircleView(progress: $viewModel.stand, goal: 12, color: .blue)
                                 .padding(.all, 40)

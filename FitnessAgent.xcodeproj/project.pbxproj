@@ -29,9 +29,22 @@
 		BFA8E1A22DDE36ED008C4934 /* FitnessAgentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitnessAgentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BFA8E6A12DE75124008C4934 /* Exceptions for "FitnessAgent" folder in "FitnessAgent" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BFA8E1872DDE36EB008C4934 /* FitnessAgent */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BFA8E18A2DDE36EB008C4934 /* FitnessAgent */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BFA8E6A12DE75124008C4934 /* Exceptions for "FitnessAgent" folder in "FitnessAgent" target */,
+			);
 			path = FitnessAgent;
 			sourceTree = "<group>";
 		};
@@ -397,6 +410,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FitnessAgent/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app needs access to health data to track your fitness progress";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app needs to update health data to record your activities.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -436,6 +452,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FitnessAgent/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app needs access to health data to track your fitness progress";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app needs to update health data to record your activities.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
