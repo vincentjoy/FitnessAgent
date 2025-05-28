@@ -8,6 +8,9 @@
 import Foundation
 
 @Observable class HomeViewModel {
+    
+    let healthManager = HealthManager.shared
+    
     var calories: Int = 100
     var active: Int = 52
     var stand: Int = 8
@@ -25,4 +28,33 @@ import Foundation
         Workout(id: 2, title: "Walking", image: "figure.walk", tintColor: .purple, duration: "51 Mins", date: "Aug 5", calories: "319 kcal "),
         Workout(id: 3, title: "Running", image: "figure.run", tintColor: .cyan, duration: "51 Mins", date: "Sep 7", calories: "512 kcal ")
     ]
+    
+    init() {
+        
+        Task {
+            do {
+                try await healthManager.requestHealthKitAccess()
+                
+                healthManager.fetchTodayCaloriesBurned { result in
+                    switch result {
+                    case .success(let success):
+                        print(success)
+                    case .failure(let failure):
+                        print(failure.localizedDescription)
+                    }
+                }
+                
+                healthManager.fetchTodayStandHours { result in
+                    switch result {
+                    case .success(let success):
+                        print(success)
+                    case .failure(let failure):
+                        print(failure.localizedDescription)
+                    }
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
 }
