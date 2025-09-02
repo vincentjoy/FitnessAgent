@@ -397,6 +397,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FitnessAgent/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app needs access to health data to track your fitness progress";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app needs to update health data to record your activities.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -436,6 +439,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FitnessAgent/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app needs access to health data to track your fitness progress";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app needs to update health data to record your activities.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
