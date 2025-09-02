@@ -14,6 +14,7 @@ import Foundation
     var calories: Int = 100
     var exercise: Int = 52
     var stand: Int = 8
+    var activities: [Activity] = []
     
     var mockActivities: [Activity] = [
         Activity(id: 0, title: "Today's Steps", subtitle: "Goal 10,000", image: "figure.walk", tintColor: .green, amount: "9,812"),
@@ -37,6 +38,7 @@ import Foundation
                 fetchTodayCalories()
                 fetchTodayExerciseTime()
                 fetchTodayStandHours()
+                fetchTodaySteps()
             } catch {
                 print(error)
             }
@@ -49,6 +51,8 @@ import Foundation
             case .success(let calories):
                 DispatchQueue.main.async {
                     self.calories = Int(calories)
+                    let activity = Activity(id: 1, title: "Calories Burned", subtitle: "today", image: "flame", tintColor: .red, amount: calories.formattedNumberString())
+                    self.activities.append(activity)
                 }
             case .failure(let failure):
                 print("fetchTodayCalories error - ", failure.localizedDescription)
@@ -78,6 +82,20 @@ import Foundation
                 }
             case .failure(let failure):
                 print("fetchTodayStandHours error - ", failure.localizedDescription)
+            }
+        }
+    }
+    
+    // MARK: Fitness Activity
+    func fetchTodaySteps() {
+        healthManager.fetchTodaySteps { result in
+            switch result {
+            case .success(let activity):
+                DispatchQueue.main.async {
+                    self.activities.append(activity)
+                }
+            case .failure(let failure):
+                print("fetchTodaySteps error - ", failure.localizedDescription)
             }
         }
     }
