@@ -17,10 +17,10 @@ import Foundation
     var activities: [Activity] = []
     
     var mockActivities: [Activity] = [
-        Activity(id: 0, title: "Today's Steps", subtitle: "Goal 10,000", image: "figure.walk", tintColor: .green, amount: "9,812"),
-        Activity(id: 1, title: "Today's Steps", subtitle: "Goal 10,000", image: "figure.walk", tintColor: .red, amount: "6,131"),
-        Activity(id: 2, title: "Today's Steps", subtitle: "Goal 10,000", image: "figure.walk", tintColor: .blue, amount: "4,324"),
-        Activity(id: 3, title: "Today's Steps", subtitle: "Goal 10,000", image: "figure.run", tintColor: .purple, amount: "7,893")
+        Activity(title: "Today's Steps", subtitle: "Goal 10,000", image: "figure.walk", tintColor: .green, amount: "9,812"),
+        Activity(title: "Today's Steps", subtitle: "Goal 10,000", image: "figure.walk", tintColor: .red, amount: "6,131"),
+        Activity(title: "Today's Steps", subtitle: "Goal 10,000", image: "figure.walk", tintColor: .blue, amount: "4,324"),
+        Activity(title: "Today's Steps", subtitle: "Goal 10,000", image: "figure.run", tintColor: .purple, amount: "7,893")
     ]
     
     var mockWorkouts: [Workout] = [
@@ -39,6 +39,7 @@ import Foundation
                 fetchTodayExerciseTime()
                 fetchTodayStandHours()
                 fetchTodaySteps()
+                fetchCurrentWeekActivities()
             } catch {
                 print(error)
             }
@@ -51,7 +52,7 @@ import Foundation
             case .success(let calories):
                 DispatchQueue.main.async {
                     self.calories = Int(calories)
-                    let activity = Activity(id: 1, title: "Calories Burned", subtitle: "today", image: "flame", tintColor: .red, amount: calories.formattedNumberString())
+                    let activity = Activity(title: "Calories Burned", subtitle: "today", image: "flame", tintColor: .red, amount: calories.formattedNumberString())
                     self.activities.append(activity)
                 }
             case .failure(let failure):
@@ -93,6 +94,19 @@ import Foundation
             case .success(let activity):
                 DispatchQueue.main.async {
                     self.activities.append(activity)
+                }
+            case .failure(let failure):
+                print("fetchTodaySteps error - ", failure.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchCurrentWeekActivities() {
+        healthManager.fetchCurrentWeekWorkoutStats { result in
+            switch result {
+            case .success(let activities):
+                DispatchQueue.main.async {
+                    self.activities.append(contentsOf: activities)
                 }
             case .failure(let failure):
                 print("fetchTodaySteps error - ", failure.localizedDescription)
